@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+
+        header {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 1em;
+        }
+
+        .order-container {
+            max-width: 600px;
+            margin: 20px auto;
+            background-color: white;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            border-radius: 8px;
+        }
+
+        .item-image {
+            max-width: 100%;
+            height: auto;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .price-display,
+        #dimensions-display {
+            font-size: 1.2em;
+            margin-bottom: 20px;
+            color: #007bff;
+        }
+
+        .delivery-options,
+        .pickup-location,
+        .delivery-address,
+        .additional-info,
+        .color-selection {
+            margin-bottom: 20px;
+            padding: 15px;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+        }
+
+        .delivery-address {
+            display: none;
+        }
+
+        .input-label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            text-align: left;
+        }
+
+        select,
+        input,
+        textarea {
+            width: 100%;
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+            margin-bottom: 15px;
+            box-sizing: border-box;
+        }
+
+        .confirm-button {
+            background: linear-gradient(to right, #007bff, #0056b3);
+            color: white;
+            cursor: pointer;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: background 0.3s ease-in-out;
+        }
+
+        .confirm-button:hover {
+            background: linear-gradient(to right, #0056b3, #003366);
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Order Page</h1>
+    </header>
+
+    <div class="order-container">
+        <!-- Item Image -->
+        <img src="" alt="Item" class="item-image" id="itemImage">
+
+        <!-- Item Title -->
+        <div class="item-title" id="itemTitle"></div>
+
+        <!-- Price Display -->
+        <div class="price-display">
+            <label>Price:</label>
+            <span id="price-display"></span>
+        </div>
+
+        <!-- Delivery Options -->
+        <div class="delivery-options">
+            <label for="delivery">Choose Delivery Option:</label>
+            <select id="delivery" name="delivery" onchange="updateDeliveryOption()">
+                <option value="pickup">Pickup</option>
+                <option value="delivery">Delivery</option>
+            </select>
+
+            <!-- Pickup Location (Hidden by default) -->
+            <div class="pickup-location" id="pickupLocation">
+                <label for="pickup-location">Choose Pickup Location:</label>
+                <select id="pickup-location" name="pickup-location">
+                    <option value="Askim-Ungdomskole">Askim Ungdomskole</option>
+                    <option value="Eid-Barnehage">Eid Barnehage</option>
+                </select>
+            </div>
+
+            <!-- Delivery Address (Hidden by default) -->
+            <div class="delivery-address" id="deliveryAddress">
+                <label for="address" class="input-label">Delivery Address (Askim, Norway):</label>
+                <input type="text" id="address" name="address">
+                <label for="address" class="input-label">Delivery costs 20 NOK</label>
+            </div>
+        </div>
+
+        <!-- Additional Information -->
+        <div class="additional-info">
+            <label for="name" class="input-label">Name:</label>
+            <input type="text" id="name" name="name" required>
+
+            <label for="age" class="input-label">Age:</label>
+            <input type="number" id="age" name="age" required>
+
+            <label for="email" class="input-label">Email:</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="phone" class="input-label">Phone:</label>
+            <input type="tel" id="phone" name="phone" required>
+
+            <label for="additional-info" class="input-label">Additional Information:</label>
+            <textarea id="additional-info" name="additional-info" rows="4"></textarea>
+        </div>
+
+        <!-- Color Selection -->
+        <div class="color-selection">
+            <label for="color">Choose Color:</label>
+            <select id="color" name="color">
+                <option value="white">White</option>
+                <option value="black">Black</option>
+                <option value="gold">Gold</option>
+            </select>
+        </div>
+
+        <!-- Confirm Button -->
+        <button class="confirm-button" onclick="submitOrderToFormspree()">Confirm Order</button>
+    </div>
+
+    <script>
+        var urlParams = new URLSearchParams(window.location.search);
+        var itemImageParam = urlParams.get('image');
+        var itemTitleParam = urlParams.get('itemname');
+        var itemPriceParam = urlParams.get('price');
+
+        // Update elements based on parameters
+        document.getElementById('itemImage').src = itemImageParam;
+        document.getElementById('itemTitle').innerText = itemTitleParam;
+        document.getElementById('price-display').innerText = itemPriceParam;
+
+        function updateDeliveryOption() {
+            var deliveryOption = document.getElementById('delivery').value;
+
+            var addressInput = document.getElementById('deliveryAddress');
+            if (deliveryOption === 'delivery') {
+                addressInput.style.display = 'block';
+            } else {
+                addressInput.style.display = 'none';
+            }
+
+            var pickupLocation = document.getElementById('pickupLocation');
+            if (deliveryOption === 'pickup') {
+                pickupLocation.style.display = 'block';
+            } else {
+                pickupLocation.style.display = 'none';
+            }
+        }
+
+        function submitOrderToFormspree() {
+            var formData = new FormData();
+            formData.append('itemName', itemTitleParam);
+            formData.append('itemPrice', itemPriceParam);
+            formData.append('deliveryOption', document.getElementById('delivery').value);
+            formData.append('addressOrLocation', (document.getElementById('delivery').value === 'delivery')
+                ? document.getElementById('address').value
+                : document.getElementById('pickup-location').value);
+            formData.append('name', document.getElementById('name').value);
+            formData.append('age', document.getElementById('age').value);
+            formData.append('email', document.getElementById('email').value);
+            formData.append('phone', document.getElementById('phone').value);
+            formData.append('additionalInfo', document.getElementById('additional-info').value);
+            formData.append('color', document.getElementById('color').value);
+
+            fetch('https://formspree.io/f/xrgnegew', {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'Accept': 'application/json'
+                    // No 'Content-Type' header needed for FormData
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+                window.location.href = 'thank-you.html';
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        }
+    </script>
+</body>
+
+</html>

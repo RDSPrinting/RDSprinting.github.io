@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="printTitle">Print Page</title>
+    <style>
+        /* Your styles remain unchanged */
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+
+        header {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 1em;
+        }
+
+        .item-container {
+            max-width: 800px;
+            margin: 20px auto;
+            background-color: white;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center; /* Center the content */
+        }
+
+        .item-image {
+            max-width: 100%;
+            height: auto;
+            margin-bottom: 20px;
+        }
+
+        .item-title {
+            font-size: 1.5em;
+            margin-bottom: 10px;
+        }
+
+        .item-price {
+            font-size: 1.2em;
+            color: #007bff;
+        }
+
+        .item-description {
+            font-size: 1em;
+            line-height: 1.4;
+            margin-bottom: 20px;
+        }
+
+        .payment-info {
+            font-size: 1.1em;
+            margin-bottom: 20px;
+        }
+
+        .buy-button {
+            background: linear-gradient(to right, #007bff, #0056b3);
+            color: white;
+            cursor: pointer;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: background 0.3s ease-in-out;
+        }
+
+        .buy-button:hover {
+            background: linear-gradient(to right, #0056b3, #003366);
+        }
+    </style>
+ <script>
+document.addEventListener("DOMContentLoaded", function () {
+    // Get print information from URL parameters
+    const printInfo = {
+        title: getParameterByName('itemname'),
+        price: getParameterByName('price'),
+        image: getParameterByName('image'),
+        measurements: getParameterByName('measurements')
+    };
+
+    // Update content dynamically
+    document.title = printInfo.title || '';
+    document.getElementById("printTitle").innerText = printInfo.title || '';
+
+    document.querySelector(".item-image").src = printInfo.image || '';
+    document.querySelector(".item-title").innerText = printInfo.title || '';
+    document.querySelector(".item-price").innerText = printInfo.price || '';
+
+    // Additional code to display measurements
+    var measurementsElement = document.querySelector(".item-measurements");
+    if (measurementsElement && printInfo.measurements) {
+        measurementsElement.innerText = `Measurements: ${printInfo.measurements}`;
+    }
+});
+
+function redirectToPurchasePage() {
+    // Get the information you need
+    var itemName = document.getElementById("printTitle").innerText.trim();
+    var itemPrice = document.querySelector(".item-price").innerText.trim();
+    var itemImage = document.querySelector(".item-image").src.trim();
+
+    // Construct the URL with parameters
+    var purchasePageUrl = "/purchase-page.html" +
+        "?itemname=" + encodeURIComponent(itemName) +
+        "&price=" + encodeURIComponent(itemPrice) +
+        "&image=" + encodeURIComponent(itemImage);
+
+    // Redirect to the purchase page
+    window.location.href = purchasePageUrl;
+}
+
+
+function getParameterByName(name, url) {
+    if (!url) url = window.location.href;
+    name = name.replace(/[\[\]]/g, "\\$&");
+    var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+        results = regex.exec(url);
+    if (!results) return null;
+    if (!results[2]) return '';
+    return decodeURIComponent(results[2].replace(/\+/g, " "));
+}
+
+
+</script>
+</head>
+<body>
+    <header>
+        <h1 id="printTitle"></h1>
+    </header>
+
+    <div class="item-container">
+        <img src="" alt="Print Image" class="item-image">
+        <div class="item-title"></div>
+        <div class="item-price"></div>
+    
+        <div class="payment-info">
+            <p>We accept payment in cash. No credit card information is needed.</p>
+        </div>
+    
+        <!-- Buy Button -->
+        <button class="buy-button" onclick="redirectToPurchasePage()">Buy Now</button>
+    </div>
+</body>
+</html>
