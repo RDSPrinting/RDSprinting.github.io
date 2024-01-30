@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D Prints Shop</title>
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>3D Prints Shop</title>
+        <style>
+/* Black, White, and Gray Color Palette */
+:root {
+    --primary-color: #e0e0e0;  /* Black */
+    --secondary-color: #c5c5c5;  /* White */
+    --tertiary-color: #504f4f;  /* Gray */
+    --quaternary-color: #202020;  /* Dark Gray */
+    --quinary-color: #007bff;  /* Blue (for links) */
+}
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: var(--secondary-color);
+    color: var(--primary-color);
+}
+
+a{
+    text-decoration: none;
+}
+
+/* Navbar Styles */
+nav {
+    background-color: var(--quaternary-color);
+    overflow: hidden;
+}
+
+nav a {
+    float: left;
+    display: block;
+    color: var(--secondary-color);
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+.dropdown {
+    display: inline-block;
+}
+
+.dropdown button {
+    font-size: 16px;
+    border: none;
+    outline: none;
+    color: var(--secondary-color);
+    padding: 14px 16px;
+    background-color: inherit;
+    font-family: inherit;
+    margin: 0;
+    cursor: pointer;
+}
+
+nav a:hover, .dropdown:hover button {
+    background-color: var(--tertiary-color);
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: var(--primary-color);
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+    z-index: 1;
+    min-width: 160px;
+    margin-top: 0; /* Adjusted positioning */
+}
+
+.dropdown-content a {
+    color: white;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+}
+
+.dropdown-content a:hover {
+    background-color: var(--quaternary-color);
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+    border-radius: 0; /* Fix border radius */
+}
+
+/* Subcategory Styles */
+.subcategory-dropdown {
+    display: inline-block;
+    position: relative;
+}
+
+.subcategory-dropdown button {
+    font-size: 16px;
+    border: none;
+    outline: none;
+    color: var(--secondary-color);
+    padding: 14px 16px;
+    background-color: inherit;
+    font-family: inherit;
+    margin: 0;
+    cursor: pointer;
+}
+
+.subcategory-content {
+    display: none;
+    position: absolute;
+    background-color: var(--tertiary-color);
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+    z-index: 1;
+    min-width: 160px;
+    top: 100%;
+}
+
+.subcategory-content a {
+    color: white;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+}
+
+.subcategory-content a:hover {
+    background-color: var(--quaternary-color);
+}
+
+.subcategory-dropdown:hover .subcategory-content {
+    display: block;
+    border-radius: 0; /* Fix border radius */
+}
+
+/* Header Styles */
+header {
+    background-color: var(--quaternary-color);
+    color: var(--secondary-color);
+    text-align: center;
+    padding: 1em;
+}
+
+/* Print Container Styles */
+.print-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    padding: 20px;
+}
+
+/* Print Box Styles */
+.print-box {
+    width: 200px; /* Fixed width */
+    height: 300px; /* Fixed height */
+    margin: 10px;
+
+    border: 1px solid #ddd;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background-color: var(--primary-color);
+    padding: 10px;
+    text-align: center;
+    max-width: 100%; /* Adjusted max-width */
+    max-height: 100%; /* Adjusted max-height */
+    overflow: hidden; /* Hide overflowing content */
+    transition: transform 0.3s; /* Add smooth transition on hover */
+}
+
+/* Print Image Styles */
+.print-image {
+    max-width: 100%;
+    max-height: 60%; /* Adjusted max-height for the image */
+    object-fit: cover; /* Maintain aspect ratio while covering */
+    transition: transform 0.3s; /* Add smooth transition on hover */
+    margin: 0px;
+}
+
+/* Print Title Styles */
+.print-title {
+    font-size: 20px;
+    color: var(--quinary-color);
+    margin: 10px 0 5px;
+    font-weight: bold;
+    color: black;
+    text-decoration: none;
+}
+
+/* Print Price Styles */
+.print-price {
+    font-size: 18px;
+    color: var(--quaternary-color);
+    margin: 5px 0;
+}
+
+/* Print Description Styles */
+.print-description {
+    font-size: 0.9em;
+    color: var(--quaternary-color);
+    margin: 5px 0;
+}
+/* Weapons Subcategory Styles */
+.subcategory-dropdown .weapons-content a {
+    display: block;
+    padding: 12px 16px;
+    text-decoration: none;
+    color: var(--primary-color);
+    text-align: left;
+}
+
+        </style>
+</head>
+<body>
+    <header>
+        <h1>RDS 3D Prints</h1>
+    </header>
+
+   
+    <nav>
+    
+        <div class="dropdown">
+            <button class="dropbtn">Categories</button>
+            <div class="dropdown-content">
+                <div class="subcategory-dropdown">
+                    <button><a href="/Cathegories/Weapons/weapons.html">Gear and Tools</a></button>
+                    <div class="subcategory-content">
+                        <a href="/Cathegories/Weapons/kunai.html">Kunai</a>
+                        <a href="/Cathegories/Weapons/karambit.html">Karambit</a>
+                        <a href="/Cathegories/Weapons/shuriken.html">Shuriken</a>
+                        <a href="/Cathegories/Weapons/butterflyknife.html">Butterfly Knife</a>
+                    </div>
+                </div>
+
+                <!-- Add more main categories with specific subcategories as needed -->
+            </div>
+        </div>
+    
+    </nav>
+
+    <div class="print-container" id="printContainer">
+
+        <a href="../../../print-page.html?name=Kunai Naruto&price=Kunai Naruto - 50 NOK&measurements=52mmx268mmx27mm&creditsLink=https://example.com/credits&image=/images/kunai-naruto.webp">   
+        <div class="print-box">
+            <img src="images/kunai-naruto.webp" alt="Print 1" class="print-image">
+            <div class="print-title">Kunai Naruto</div>
+            <div class="print-price">50 NOK</div>
+        </div>
+        </a>
+
+        <a href="print-page.html?name=Kunai Naruto&price=Kunai Like Dagger - 25 NOK&measurements=52mmx268mmx27mm&creditsLink=https://example.com/credits&image=/images/kunai-like-dagger.png">   
+            <div class="print-box">
+                <img src="images/kunai-like-dagger.png" alt="Print 1" class="print-image">
+                <div class="print-title">Kunai Like Dagger</div>
+                <div class="print-price">25 NOK</div>
+            </div>
+        </a>
+
+        <a href="print-page.html?name=Kunai Naruto&price=Miniato Kunai - 40 NOK&measurements=52mmx268mmx27mm&creditsLink=https://example.com/credits&image=images/miniato-kunai.webp">   
+            <div class="print-box">
+                <img src="images/miniato-kunai.webp" alt="Print 1" class="print-image">
+                <div class="print-title">Miniato Kunai</div>
+                <div class="print-price">40 NOK</div>
+            </div>
+        </a>
+
+        <a href="print-page.html?name=Kunai Naruto&price=Kunai Miniato - 90 NOK&measurements=52mmx268mmx27mm&creditsLink=https://example.com/credits&image=images/kunai-miniato.webp">   
+            <div class="print-box">
+                <img src="images/kunai-miniato.webp" alt="Print 1" class="print-image">
+                <div class="print-title">Kunai Miniato</div>
+                <div class="print-price">90 NOK</div>
+            </div>
+        </a>
+
+        <a href="print-page.html?name=Kunai Naruto&price=Karambit Knife - 20 NOK&measurements=52mmx268mmx27mm&creditsLink=https://example.com/credits&image=images/karambit-knife.webp">   
+            <div class="print-box">
+                <img src="images/karambit-knife.webp" alt="Print 1" class="print-image">
+                <div class="print-title">Karambit Knife</div>
+                <div class="print-price">20 NOK</div>
+            </div>
+        </a>
+
+        <a href="print-page.html?name=Kunai Naruto&price=Solid Karambit - 45 NOK&measurements=52mmx268mmx27mm&creditsLink=https://example.com/credits&image=images/solid-karambit.webp">   
+            <div class="print-box">
+                <img src="images/solid-karambit.webp" alt="Print 1" class="print-image">
+                <div class="print-title">Solid Karambit</div>
+                <div class="print-price">45 NOK</div>
+            </div>
+        </a>
+
+        <a href="print-page.html?name=Kunai Naruto&price=Shuriken - 15 NOK&measurements=52mmx268mmx27mm&creditsLink=https://example.com/credits&image=images/shuriken.PNG">   
+            <div class="print-box">
+                <img src="images/shuriken.PNG" alt="Print 1" class="print-image">
+                <div class="print-title">Shuriken</div>
+                <div class="print-price">15 NOK</div>
+            </div>
+        </a>
+
+        <a href="print-page.html?name=Kunai Naruto&price=Four Bladed Shuriken - 15 NOK&measurements=52mmx268mmx27mm&creditsLink=https://example.com/credits&image=images/four-bladed-shuriken.PNG">   
+            <div class="print-box">
+                <img src="images/four-bladed-shuriken.PNG" alt="Print 1" class="print-image">
+                <div class="print-title">Four Bladed Shuriken</div>
+                <div class="print-price">15 NOK</div>
+            </div>
+        </a>
+
+        <a href="print-page.html?name=Kunai Naruto&price=Star Shuriken - 15 NOK&measurements=52mmx268mmx27mm&creditsLink=https://example.com/credits&image=images/star-shuriken.PNG">   
+            <div class="print-box">
+                <img src="images/star-shuriken.PNG" alt="Print 1" class="print-image">
+                <div class="print-title">Star Shuriken</div>
+                <div class="print-price">15 NOK</div>
+            </div>
+        </a>
+
+        <a href="print-page.html?name=Kunai Naruto&price=Cube Star Shuriken - 15 NOK&measurements=52mmx268mmx27mm&creditsLink=https://example.com/credits&image=images/cube-star-shuriken.PNG">   
+            <div class="print-box">
+                <img src="images/cube-star-shuriken.PNG" alt="Print 1" class="print-image">
+                <div class="print-title">Cube Star Shuriken</div>
+                <div class="print-price">15 NOK</div>
+            </div>
+        </a>
+
+        <a href="print-page.html?name=Kunai Naruto&price=Six Bladed Shuriken - 15 NOK&measurements=52mmx268mmx27mm&creditsLink=https://example.com/credits&image=images/six-bladed-shuriken.PNG">   
+            <div class="print-box">
+                <img src="images/six-bladed-shuriken.PNG" alt="Print 1" class="print-image">
+                <div class="print-title">Six Bladed Shuriken</div>
+                <div class="print-price">15 NOK</div>
+            </div>
+        </a>
+
+        <a href="print-page.html?name=Kunai Naruto&price=Knife Shuriken - 15 NOK&measurements=52mmx268mmx27mm&creditsLink=https://example.com/credits&image=images/knife-shuriken.PNG">   
+            <div class="print-box">
+                <img src="images/knife-shuriken.PNG" alt="Print 1" class="print-image">
+                <div class="print-title">Knife Shuriken</div>
+                <div class="print-price">15 NOK</div>
+            </div>
+        </a>
+
+        <a href="print-page.html?name=Kunai Naruto&price=Windmill Shuriken - 15 NOK&measurements=52mmx268mmx27mm&creditsLink=https://example.com/credits&image=images/windmill-shuriken.PNG">   
+            <div class="print-box">
+                <img src="images/windmill-shuriken.PNG" alt="Print 1" class="print-image">
+                <div class="print-title">Windmill Shuriken</div>
+                <div class="print-price">15 NOK</div>
+            </div>
+        </a>
+
+        <a href="print-page.html?name=Kunai Naruto&price=Razor Shuriken - 15 NOK&measurements=52mmx268mmx27mm&creditsLink=https://example.com/credits&image=images/razor-shuriken.PNG">   
+            <div class="print-box">
+                <img src="images/razor-shuriken.PNG" alt="Print 1" class="print-image">
+                <div class="print-title">Razor Shuriken</div>
+                <div class="print-price">15 NOK</div>
+            </div>
+        </a>
+
+        <a href="print-page.html?name=Kunai Naruto&price=Triangle Shuriken - 15 NOK&measurements=52mmx268mmx27mm&creditsLink=https://example.com/credits&image=images/triangle-shuriken.PNG">   
+            <div class="print-box">
+                <img src="images/triangle-shuriken.PNG" alt="Print 1" class="print-image">
+                <div class="print-title">Triangle Shuriken</div>
+                <div class="print-price">15 NOK</div>
+            </div>
+        </a>
+
+        <a href="print-page.html?name=Kunai Naruto&price=Snowflake Shuriken - 15 NOK&measurements=52mmx268mmx27mm&creditsLink=https://example.com/credits&image=images/snowflake-shuriken.PNG">   
+            <div class="print-box">
+                <img src="images/snowflake-shuriken.PNG" alt="Print 1" class="print-image">
+                <div class="print-title">Snowflake Shuriken</div>
+                <div class="print-price">15 NOK</div>
+            </div>
+        </a>
+
+        <a href="print-page.html?name=Kunai Naruto&price=Cross Shuriken - 15 NOK&measurements=52mmx268mmx27mm&creditsLink=https://example.com/credits&image=images/cross-shuriken.PNG">   
+            <div class="print-box">
+                <img src="images/cross-shuriken.PNG" alt="Print 1" class="print-image">
+                <div class="print-title">Cross Shuriken</div>
+                <div class="print-price">15 NOK</div>
+            </div>
+        </a>
+
+        <a href="print-page.html?name=Kunai Naruto&price=Three Bladed Shuriken - 15 NOK&measurements=52mmx268mmx27mm&creditsLink=https://example.com/credits&image=images/three-bladed-shuriken.PNG">   
+            <div class="print-box">
+                <img src="images/three-bladed-shuriken.PNG" alt="Print 1" class="print-image">
+                <div class="print-title">Three Bladed Shuriken</div>
+                <div class="print-price">15 NOK</div>
+            </div>
+        </a>
+
+        <a href="print-page.html?name=Kunai Naruto&price=Eight Bladed Shuriken - 15 NOK&measurements=52mmx268mmx27mm&creditsLink=https://example.com/credits&image=images/eight-bladed-shuriken.PNG">   
+            <div class="print-box">
+                <img src="images/eight-bladed-shuriken.PNG" alt="Print 1" class="print-image">
+                <div class="print-title">Eight Bladed Shuriken</div>
+                <div class="print-price">15 NOK</div>
+            </div>
+        </a>
+
+        <a href="print-page.html?name=Kunai Naruto&price=Eight Bladed Shuriken - 15 NOK&measurements=52mmx268mmx27mm&creditsLink=https://example.com/credits&image=images/eight-bladed-shuriken.PNG">   
+            <div class="print-box">
+                <img src="images/eight-bladed-shuriken.PNG" alt="Print 1" class="print-image">
+                <div class="print-title">Eight Bladed Shuriken</div>
+                <div class="print-price">15 NOK</div>
+            </div>
+        </a>
+
+        <a href="print-page.html?name=Kunai Naruto&price=Circle Shuriken - 15 NOK&measurements=52mmx268mmx27mm&creditsLink=https://example.com/credits&image=images/circle-shuriken.PNG">   
+            <div class="print-box">
+                <img src="images/circle-shuriken.PNG" alt="Print 1" class="print-image">
+                <div class="print-title">Circle Shuriken</div>
+                <div class="print-price">15 NOK</div>
+            </div>
+        </a>
+
+        <a href="print-page.html?name=Kunai Naruto&price=Cube Slicer Shuriken - 15 NOK&measurements=52mmx268mmx27mm&creditsLink=https://example.com/credits&image=images/cube-slicer-shuriken.PNG">   
+            <div class="print-box">
+                <img src="images/cube-slicer-shuriken.PNG" alt="Print 1" class="print-image">
+                <div class="print-title">Cube Slicer Shuriken</div>
+                <div class="print-price">15 NOK</div>
+            </div>
+        </a>
+
+        <a href="print-page.html?name=Kunai Naruto&price=Killer Shuriken - 15 NOK&measurements=52mmx268mmx27mm&creditsLink=https://example.com/credits&image=images/killer-shuriken.PNG">   
+            <div class="print-box">
+                <img src="images/killer-shuriken.PNG" alt="Print 1" class="print-image">
+                <div class="print-title">Killer Shuriken</div>
+                <div class="print-price">15 NOK</div>
+            </div>
+        </a>
+
+        <a href="print-page.html?name=Kunai Naruto&price=Butterfly-Knife - 35 NOK&measurements=52mmx268mmx27mm&creditsLink=https://example.com/credits&image=images/butterfly-knife.webp">   
+            <div class="print-box">
+                <img src="images/butterfly-knife.webp" alt="Print 1" class="print-image">
+                <div class="print-title">Butterfly-Knife</div>
+                <div class="print-price">35 NOK</div>
+            </div>
+        </a>
+
+        <a href="print-page.html?name=Kunai Naruto&price=Rounded Butterfly-Knife - 30 NOK&measurements=52mmx268mmx27mm&creditsLink=https://example.com/credits&image=images/rounded-butterfly-knife.webp">   
+            <div class="print-box">
+                <img src="images/rounded-butterfly-knife.webp" alt="Print 1" class="print-image">
+                <div class="print-title">Rounded Butterfly-Knife</div>
+                <div class="print-price">30 NOK</div>
+            </div>
+        </a>
+
+    </div>
+    <script>
+        // Function to shuffle an array (Fisher-Yates algorithm)
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+        }
+
+        // Get the container element
+        const printContainer = document.getElementById("printContainer");
+
+        // Get all child elements (product boxes) of the container
+        const printBoxes = Array.from(printContainer.children);
+
+        // Shuffle the order of product boxes
+        shuffleArray(printBoxes);
+
+        // Append the shuffled product boxes back to the container
+        printBoxes.forEach(box => printContainer.appendChild(box));
+    </script>
+</body>
+</html>
